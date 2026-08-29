@@ -46,7 +46,7 @@
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
-    "generate-api-client": "npx openapi-generator-cli generate -i https://horpynka.com/api/docs-json -g typescript-axios -o src/api/generated --skip-validate-spec",
+    "generate-api-client": "npx openapi-generator-cli generate -i https://horpynka.com/api/docs-json -g typescript-axios -o src/api/generated --skip-validate-spec && node scripts/patch-generated-api-client.mjs",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {

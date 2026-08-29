@@ -1,5 +1,3 @@
-// @ts-nocheck
-// @ts-nocheck
 /* tslint:disable */
 /* eslint-disable */
 /**
@@ -144,7 +142,20 @@ export const toPathString = function (url: URL) {
  *
  * @export
  */
-export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration): <T = unknown, R = AxiosResponse<T>>(axios?: AxiosInstance, basePath?: string) => Promise<R> {
+export const createRequestFunction: (
+  axiosArgs: RequestArgs,
+  globalAxios: AxiosInstance,
+  BASE_PATH: string,
+  configuration?: Configuration,
+) => <T = unknown, R = AxiosResponse<T>>(
+  axios?: AxiosInstance,
+  basePath?: string,
+) => Promise<R> = function (
+  axiosArgs,
+  globalAxios,
+  BASE_PATH,
+  configuration,
+) {
     return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
         const axiosRequestArgs = {...axiosArgs.options, url: (axios.defaults.baseURL ? '' : configuration?.basePath ?? basePath) + axiosArgs.url};
         return axios.request<T, R>(axiosRequestArgs);
