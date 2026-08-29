@@ -1,0 +1,19 @@
+on:
+  repository_dispatch:
+    types: [autoupdate]
+
+jobs:
+  autoupdate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Autoupdate
+        run: |
+          echo "Autoupdate"
+      - name: Commit changes
+        run: |
+          echo "Commit changes"
+      - name: Push changes
+        run: |
+          echo "Push changes"
