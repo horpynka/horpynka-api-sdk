@@ -1,6 +1,6 @@
 {
   "name": "@horpynka/api-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shared API client and TanStack Query hooks for Horpynka admin panel and cashier app",
   "type": "module",
   "main": "./dist/index.cjs",
