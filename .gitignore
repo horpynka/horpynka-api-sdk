@@ -4,7 +4,3 @@ dist/
 .DS_Store
 .env
 .env.local
-
-# OpenAPI artifacts (regenerated from backend)
-openapi.json
-src/api/generated/

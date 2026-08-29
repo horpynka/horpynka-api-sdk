@@ -1,19 +1,59 @@
+name: Autoupdate API SDK
+
 on:
   repository_dispatch:
     types: [autoupdate]
+
+permissions:
+  contents: write
 
 jobs:
   autoupdate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Autoupdate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Generate API client
+        run: yarn generate-api-client
+
+      - name: Check for changes
+        id: changes
         run: |
-          echo "Autoupdate"
-      - name: Commit changes
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes detected"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected"
+          fi
+
+      - name: Commit, bump version, publish, and push
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "Commit changes"
-      - name: Push changes
-        run: |
-          echo "Push changes"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          VERSION=$(npm version patch --no-git-tag-version)
+          git add package.json
+          git commit -m "chore: regenerate API client and release ${VERSION}"
+          git tag "${VERSION}"
+
+          npm publish --access public
+
+          git push origin HEAD --follow-tags
