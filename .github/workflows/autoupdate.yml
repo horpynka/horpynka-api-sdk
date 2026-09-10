@@ -1,6 +1,9 @@
 name: Autoupdate API SDK
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
   repository_dispatch:
     types: [autoupdate]
