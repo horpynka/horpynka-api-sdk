@@ -5,6 +5,7 @@ base.ts
 common.ts
 configuration.ts
 docs/AppApi.md
+docs/AuthApi.md
 docs/CategoriesApi.md
 docs/Category.md
 docs/CreateOrderDto.md
@@ -17,6 +18,8 @@ docs/OrderItem.md
 docs/OrdersApi.md
 docs/Product.md
 docs/ProductsApi.md
+docs/SignInUserDTO.md
+docs/SignUpUserDTO.md
 docs/UpdateOrderDto.md
 git_push.sh
 index.ts
