@@ -35,12 +35,10 @@ npm install @horpynka/api-sdk axios @tanstack/react-query react
 ```
 
 ```ts
-import { createApiClient } from "@horpynka/api-sdk/client";
-import { useQuery, QueryClientProvider } from "@horpynka/api-sdk/hooks";
+import { initApiClient, useOrdersApi } from "@horpynka/api-sdk";
 
-const api = createApiClient({
+const api = initApiClient({
   baseURL: "https://api.example.com",
-  getAccessToken: () => localStorage.getItem("token"),
 });
 ```
 
