@@ -26,6 +26,19 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
+ * @interface AccessTokenResponseDto
+ */
+export interface AccessTokenResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccessTokenResponseDto
+     */
+    'accessToken': string;
+}
+/**
+ * 
+ * @export
  * @interface Category
  */
 export interface Category {
@@ -768,7 +781,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async signIn(signInUserDTO: SignInUserDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async signIn(signInUserDTO: SignInUserDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccessTokenResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.signIn(signInUserDTO, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthApi.signIn']?.[localVarOperationServerIndex]?.url;
@@ -780,7 +793,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async signUp(signUpUserDTO: SignUpUserDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async signUp(signUpUserDTO: SignUpUserDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccessTokenResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.signUp(signUpUserDTO, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthApi.signUp']?.[localVarOperationServerIndex]?.url;
@@ -810,7 +823,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signIn(signInUserDTO: SignInUserDTO, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        signIn(signInUserDTO: SignInUserDTO, options?: RawAxiosRequestConfig): AxiosPromise<AccessTokenResponseDto> {
             return localVarFp.signIn(signInUserDTO, options).then((request) => request(axios, basePath));
         },
         /**
@@ -819,7 +832,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signUp(signUpUserDTO: SignUpUserDTO, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        signUp(signUpUserDTO: SignUpUserDTO, options?: RawAxiosRequestConfig): AxiosPromise<AccessTokenResponseDto> {
             return localVarFp.signUp(signUpUserDTO, options).then((request) => request(axios, basePath));
         },
     };

@@ -52,7 +52,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **signIn**
-> signIn(signInUserDTO)
+> AccessTokenResponseDto signIn(signInUserDTO)
 
 
 ### Example
@@ -83,7 +83,7 @@ const { status, data } = await apiInstance.signIn(
 
 ### Return type
 
-void (empty response body)
+**AccessTokenResponseDto**
 
 ### Authorization
 
@@ -92,7 +92,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -103,7 +103,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **signUp**
-> signUp(signUpUserDTO)
+> AccessTokenResponseDto signUp(signUpUserDTO)
 
 
 ### Example
@@ -134,7 +134,7 @@ const { status, data } = await apiInstance.signUp(
 
 ### Return type
 
-void (empty response body)
+**AccessTokenResponseDto**
 
 ### Authorization
 
@@ -143,7 +143,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details

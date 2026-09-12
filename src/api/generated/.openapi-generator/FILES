@@ -4,6 +4,7 @@ api.ts
 base.ts
 common.ts
 configuration.ts
+docs/AccessTokenResponseDto.md
 docs/AppApi.md
 docs/AuthApi.md
 docs/CategoriesApi.md
