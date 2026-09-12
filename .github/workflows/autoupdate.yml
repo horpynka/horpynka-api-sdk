@@ -30,6 +30,8 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Generate API client
+        env:
+          OPENAPI_SPEC_URL: ${{ vars.OPENAPI_SPEC_URL }}
         run: yarn generate-api-client
 
       - name: Check for changes
