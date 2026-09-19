@@ -1,1 +1,9 @@
-export { initApiClient, tanstackClient, ordersApi, authApi } from "./clients";
+export {
+  initApiClient,
+  tanstackClient,
+  authApi,
+  categoriesApi,
+  dishesApi,
+  ordersApi,
+  productsApi,
+} from "./clients";

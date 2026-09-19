@@ -1,10 +1,20 @@
 import axios, { AxiosInstance, CreateAxiosDefaults } from "axios";
-import { AuthApi, Configuration, OrdersApi } from "../api/generated";
+import {
+  AuthApi,
+  CategoriesApi,
+  Configuration,
+  DishesApi,
+  OrdersApi,
+  ProductsApi,
+} from "../api/generated";
 import { QueryClient } from "@tanstack/react-query";
 
 export let tanstackClient: QueryClient;
-export let ordersApi: OrdersApi;
 export let authApi: AuthApi;
+export let categoriesApi: CategoriesApi;
+export let dishesApi: DishesApi;
+export let ordersApi: OrdersApi;
+export let productsApi: ProductsApi;
 
 export function initApiClient(config: CreateAxiosDefaults): AxiosInstance {
   const apiClient = axios.create({
@@ -17,8 +27,11 @@ export function initApiClient(config: CreateAxiosDefaults): AxiosInstance {
   });
 
   tanstackClient = new QueryClient();
-  ordersApi = new OrdersApi(configuration, undefined, apiClient);
   authApi = new AuthApi(configuration, undefined, apiClient);
+  categoriesApi = new CategoriesApi(configuration, undefined, apiClient);
+  dishesApi = new DishesApi(configuration, undefined, apiClient);
+  ordersApi = new OrdersApi(configuration, undefined, apiClient);
+  productsApi = new ProductsApi(configuration, undefined, apiClient);
 
   return apiClient;
 }
