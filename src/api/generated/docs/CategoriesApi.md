@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**findAll**](#findall) | **GET** /categories | |
+|[**findOne**](#findone) | **GET** /categories/{id} | |
 
 # **findAll**
 > object findAll()
@@ -31,6 +32,56 @@ This endpoint does not have any parameters.
 ### Return type
 
 **object**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **findOne**
+> Category findOne()
+
+
+### Example
+
+```typescript
+import {
+    CategoriesApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new CategoriesApi(configuration);
+
+let id: number; // (default to undefined)
+
+const { status, data } = await apiInstance.findOne(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] |  | defaults to undefined|
+
+
+### Return type
+
+**Category**
 
 ### Authorization
 

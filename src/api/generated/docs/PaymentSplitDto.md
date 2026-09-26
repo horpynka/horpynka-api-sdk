@@ -1,25 +1,21 @@
-# Ingredient
+# PaymentSplitDto
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **number** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
-**measurementUnit** | **string** |  | [default to undefined]
-**dishIngredients** | [**Array&lt;DishIngredient&gt;**](DishIngredient.md) |  | [default to undefined]
+**value** | **number** |  | [default to undefined]
 
 ## Example
 
 ```typescript
-import { Ingredient } from './api';
+import { PaymentSplitDto } from './api';
 
-const instance: Ingredient = {
-    id,
+const instance: PaymentSplitDto = {
     name,
-    measurementUnit,
-    dishIngredients,
+    value,
 };
 ```
 

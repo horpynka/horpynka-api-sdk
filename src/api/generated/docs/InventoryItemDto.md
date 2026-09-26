@@ -1,4 +1,4 @@
-# Ingredient
+# InventoryItemDto
 
 
 ## Properties
@@ -8,18 +8,20 @@ Name | Type | Description | Notes
 **id** | **number** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **measurementUnit** | **string** |  | [default to undefined]
-**dishIngredients** | [**Array&lt;DishIngredient&gt;**](DishIngredient.md) |  | [default to undefined]
+**expectedQuantity** | **number** |  | [default to undefined]
+**actualQuantity** | **number** |  | [default to undefined]
 
 ## Example
 
 ```typescript
-import { Ingredient } from './api';
+import { InventoryItemDto } from './api';
 
-const instance: Ingredient = {
+const instance: InventoryItemDto = {
     id,
     name,
     measurementUnit,
-    dishIngredients,
+    expectedQuantity,
+    actualQuantity,
 };
 ```
 

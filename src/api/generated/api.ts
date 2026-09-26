@@ -39,6 +39,87 @@ export interface AccessTokenResponseDto {
 /**
  * 
  * @export
+ * @interface CashShiftDto
+ */
+export interface CashShiftDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CashShiftDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CashShiftDto
+     */
+    'openedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CashShiftDto
+     */
+    'closedAt': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CashShiftDto
+     */
+    'openingBalance': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CashShiftDto
+     */
+    'cashSales': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CashShiftDto
+     */
+    'cardSales': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CashShiftDto
+     */
+    'refunds': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CashShiftDto
+     */
+    'closingBalance': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CashShiftDto
+     */
+    'ordersCount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CashShiftDto
+     */
+    'status': CashShiftDtoStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CashShiftDto
+     */
+    'cashierName': string;
+}
+
+export const CashShiftDtoStatusEnum = {
+    Open: 'OPEN',
+    Closed: 'CLOSED'
+} as const;
+
+export type CashShiftDtoStatusEnum = typeof CashShiftDtoStatusEnum[keyof typeof CashShiftDtoStatusEnum];
+
+/**
+ * 
+ * @export
  * @interface Category
  */
 export interface Category {
@@ -122,6 +203,79 @@ export const CreateOrderDtoStatusEnum = {
 
 export type CreateOrderDtoStatusEnum = typeof CreateOrderDtoStatusEnum[keyof typeof CreateOrderDtoStatusEnum];
 
+/**
+ * 
+ * @export
+ * @interface DashboardStatsDto
+ */
+export interface DashboardStatsDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardStatsDto
+     */
+    'todaySales': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardStatsDto
+     */
+    'ordersCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardStatsDto
+     */
+    'openOrders': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardStatsDto
+     */
+    'closedOrders': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardStatsDto
+     */
+    'cashSales': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardStatsDto
+     */
+    'cardSales': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardStatsDto
+     */
+    'refunds': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardStatsDto
+     */
+    'averageOrder': number;
+    /**
+     * 
+     * @type {CashShiftDto}
+     * @memberof DashboardStatsDto
+     */
+    'currentShift': CashShiftDto | null;
+    /**
+     * 
+     * @type {Array<SalesByDayDto>}
+     * @memberof DashboardStatsDto
+     */
+    'salesByDay': Array<SalesByDayDto>;
+    /**
+     * 
+     * @type {Array<PaymentSplitDto>}
+     * @memberof DashboardStatsDto
+     */
+    'paymentSplit': Array<PaymentSplitDto>;
+}
 /**
  * 
  * @export
@@ -243,6 +397,12 @@ export interface Ingredient {
      * @type {string}
      * @memberof Ingredient
      */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Ingredient
+     */
     'measurementUnit': string;
     /**
      * 
@@ -251,6 +411,173 @@ export interface Ingredient {
      */
     'dishIngredients': Array<DishIngredient>;
 }
+/**
+ * 
+ * @export
+ * @interface InventoryDto
+ */
+export interface InventoryDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryDto
+     */
+    'finishedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryDto
+     */
+    'status': InventoryDtoStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryDto
+     */
+    'responsible': string;
+    /**
+     * 
+     * @type {Array<InventoryItemDto>}
+     * @memberof InventoryDto
+     */
+    'items': Array<InventoryItemDto>;
+}
+
+export const InventoryDtoStatusEnum = {
+    Completed: 'COMPLETED',
+    WithDifferences: 'WITH_DIFFERENCES',
+    InProgress: 'IN_PROGRESS'
+} as const;
+
+export type InventoryDtoStatusEnum = typeof InventoryDtoStatusEnum[keyof typeof InventoryDtoStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface InventoryItemDto
+ */
+export interface InventoryItemDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryItemDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryItemDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryItemDto
+     */
+    'measurementUnit': InventoryItemDtoMeasurementUnitEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryItemDto
+     */
+    'expectedQuantity': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryItemDto
+     */
+    'actualQuantity': number;
+}
+
+export const InventoryItemDtoMeasurementUnitEnum = {
+    G: 'g',
+    Ml: 'ml',
+    Pcs: 'pcs'
+} as const;
+
+export type InventoryItemDtoMeasurementUnitEnum = typeof InventoryItemDtoMeasurementUnitEnum[keyof typeof InventoryItemDtoMeasurementUnitEnum];
+
+/**
+ * 
+ * @export
+ * @interface MenuItemDto
+ */
+export interface MenuItemDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof MenuItemDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MenuItemDto
+     */
+    'kind': MenuItemDtoKindEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof MenuItemDto
+     */
+    'entityId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MenuItemDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof MenuItemDto
+     */
+    'categoryId': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof MenuItemDto
+     */
+    'sellingPrice': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof MenuItemDto
+     */
+    'ownPrice': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MenuItemDto
+     */
+    'selling': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof MenuItemDto
+     */
+    'updatedAt': string;
+}
+
+export const MenuItemDtoKindEnum = {
+    Dish: 'DISH',
+    Product: 'PRODUCT'
+} as const;
+
+export type MenuItemDtoKindEnum = typeof MenuItemDtoKindEnum[keyof typeof MenuItemDtoKindEnum];
+
 /**
  * 
  * @export
@@ -400,6 +727,25 @@ export interface OrderItem {
 /**
  * 
  * @export
+ * @interface PaymentSplitDto
+ */
+export interface PaymentSplitDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentSplitDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaymentSplitDto
+     */
+    'value': number;
+}
+/**
+ * 
+ * @export
  * @interface Product
  */
 export interface Product {
@@ -461,6 +807,31 @@ export interface Product {
 /**
  * 
  * @export
+ * @interface SalesByDayDto
+ */
+export interface SalesByDayDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SalesByDayDto
+     */
+    'date': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SalesByDayDto
+     */
+    'sales': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SalesByDayDto
+     */
+    'orders': number;
+}
+/**
+ * 
+ * @export
  * @interface SessionResponseDto
  */
 export interface SessionResponseDto {
@@ -509,6 +880,83 @@ export interface SignUpUserDTO {
      */
     'password': string;
 }
+/**
+ * 
+ * @export
+ * @interface TransactionDto
+ */
+export interface TransactionDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionDto
+     */
+    'orderId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionDto
+     */
+    'kind': TransactionDtoKindEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionDto
+     */
+    'paymentMethod': TransactionDtoPaymentMethodEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionDto
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionDto
+     */
+    'refundedAmount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionDto
+     */
+    'orderStatus': TransactionDtoOrderStatusEnum;
+}
+
+export const TransactionDtoKindEnum = {
+    Sale: 'SALE',
+    Refund: 'REFUND'
+} as const;
+
+export type TransactionDtoKindEnum = typeof TransactionDtoKindEnum[keyof typeof TransactionDtoKindEnum];
+export const TransactionDtoPaymentMethodEnum = {
+    Cash: 'CASH',
+    Card: 'CARD',
+    Mixed: 'MIXED'
+} as const;
+
+export type TransactionDtoPaymentMethodEnum = typeof TransactionDtoPaymentMethodEnum[keyof typeof TransactionDtoPaymentMethodEnum];
+export const TransactionDtoOrderStatusEnum = {
+    Paid: 'PAID',
+    Refunded: 'REFUNDED',
+    Closed: 'CLOSED'
+} as const;
+
+export type TransactionDtoOrderStatusEnum = typeof TransactionDtoOrderStatusEnum[keyof typeof TransactionDtoOrderStatusEnum];
+
 /**
  * 
  * @export
@@ -952,6 +1400,168 @@ export class AuthApi extends BaseAPI {
 
 
 /**
+ * CashShiftsApi - axios parameter creator
+ * @export
+ */
+export const CashShiftsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/cash-shifts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne', 'id', id)
+            const localVarPath = `/cash-shifts/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CashShiftsApi - functional programming interface
+ * @export
+ */
+export const CashShiftsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CashShiftsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CashShiftDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CashShiftsApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashShiftDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CashShiftsApi.findOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * CashShiftsApi - factory interface
+ * @export
+ */
+export const CashShiftsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CashShiftsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<CashShiftDto>> {
+            return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<CashShiftDto> {
+            return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CashShiftsApi - object-oriented interface
+ * @export
+ * @class CashShiftsApi
+ * @extends {BaseAPI}
+ */
+export class CashShiftsApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CashShiftsApi
+     */
+    public findAll(options?: RawAxiosRequestConfig) {
+        return CashShiftsApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CashShiftsApi
+     */
+    public findOne(id: number, options?: RawAxiosRequestConfig) {
+        return CashShiftsApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * CategoriesApi - axios parameter creator
  * @export
  */
@@ -964,6 +1574,39 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
          */
         findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/categories`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne', 'id', id)
+            const localVarPath = `/categories/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1007,6 +1650,18 @@ export const CategoriesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['CategoriesApi.findAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Category>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CategoriesApi.findOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -1024,6 +1679,15 @@ export const CategoriesApiFactory = function (configuration?: Configuration, bas
          */
         findAll(options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Category> {
+            return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1043,6 +1707,114 @@ export class CategoriesApi extends BaseAPI {
      */
     public findAll(options?: RawAxiosRequestConfig) {
         return CategoriesApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoriesApi
+     */
+    public findOne(id: number, options?: RawAxiosRequestConfig) {
+        return CategoriesApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * DashboardApi - axios parameter creator
+ * @export
+ */
+export const DashboardApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStats: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/dashboard/stats`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * DashboardApi - functional programming interface
+ * @export
+ */
+export const DashboardApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DashboardApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getStats(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardStatsDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStats(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DashboardApi.getStats']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * DashboardApi - factory interface
+ * @export
+ */
+export const DashboardApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DashboardApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStats(options?: RawAxiosRequestConfig): AxiosPromise<DashboardStatsDto> {
+            return localVarFp.getStats(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * DashboardApi - object-oriented interface
+ * @export
+ * @class DashboardApi
+ * @extends {BaseAPI}
+ */
+export class DashboardApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public getStats(options?: RawAxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).getStats(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1205,6 +1977,427 @@ export class DishesApi extends BaseAPI {
      */
     public findOne(id: number, options?: RawAxiosRequestConfig) {
         return DishesApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * IngredientsApi - axios parameter creator
+ * @export
+ */
+export const IngredientsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/ingredients`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne', 'id', id)
+            const localVarPath = `/ingredients/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * IngredientsApi - functional programming interface
+ * @export
+ */
+export const IngredientsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = IngredientsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Ingredient>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IngredientsApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Ingredient>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IngredientsApi.findOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * IngredientsApi - factory interface
+ * @export
+ */
+export const IngredientsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = IngredientsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<Ingredient>> {
+            return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Ingredient> {
+            return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * IngredientsApi - object-oriented interface
+ * @export
+ * @class IngredientsApi
+ * @extends {BaseAPI}
+ */
+export class IngredientsApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IngredientsApi
+     */
+    public findAll(options?: RawAxiosRequestConfig) {
+        return IngredientsApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IngredientsApi
+     */
+    public findOne(id: number, options?: RawAxiosRequestConfig) {
+        return IngredientsApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * InventoryApi - axios parameter creator
+ * @export
+ */
+export const InventoryApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/inventory`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne', 'id', id)
+            const localVarPath = `/inventory/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * InventoryApi - functional programming interface
+ * @export
+ */
+export const InventoryApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = InventoryApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InventoryDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['InventoryApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InventoryDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['InventoryApi.findOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * InventoryApi - factory interface
+ * @export
+ */
+export const InventoryApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = InventoryApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<InventoryDto>> {
+            return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<InventoryDto> {
+            return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * InventoryApi - object-oriented interface
+ * @export
+ * @class InventoryApi
+ * @extends {BaseAPI}
+ */
+export class InventoryApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InventoryApi
+     */
+    public findAll(options?: RawAxiosRequestConfig) {
+        return InventoryApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InventoryApi
+     */
+    public findOne(id: number, options?: RawAxiosRequestConfig) {
+        return InventoryApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * MenuApi - axios parameter creator
+ * @export
+ */
+export const MenuApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/menu`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * MenuApi - functional programming interface
+ * @export
+ */
+export const MenuApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MenuApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MenuItemDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MenuApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * MenuApi - factory interface
+ * @export
+ */
+export const MenuApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MenuApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<MenuItemDto>> {
+            return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * MenuApi - object-oriented interface
+ * @export
+ * @class MenuApi
+ * @extends {BaseAPI}
+ */
+export class MenuApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MenuApi
+     */
+    public findAll(options?: RawAxiosRequestConfig) {
+        return MenuApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1637,6 +2830,39 @@ export const ProductsApiAxiosParamCreator = function (configuration?: Configurat
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne', 'id', id)
+            const localVarPath = `/products/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -1658,6 +2884,18 @@ export const ProductsApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['ProductsApi.findAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Product>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProductsApi.findOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -1675,6 +2913,15 @@ export const ProductsApiFactory = function (configuration?: Configuration, baseP
          */
         findAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<Product>> {
             return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Product> {
+            return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1694,6 +2941,114 @@ export class ProductsApi extends BaseAPI {
      */
     public findAll(options?: RawAxiosRequestConfig) {
         return ProductsApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductsApi
+     */
+    public findOne(id: number, options?: RawAxiosRequestConfig) {
+        return ProductsApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * TransactionsApi - axios parameter creator
+ * @export
+ */
+export const TransactionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/transactions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TransactionsApi - functional programming interface
+ * @export
+ */
+export const TransactionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TransactionsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TransactionDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TransactionsApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * TransactionsApi - factory interface
+ * @export
+ */
+export const TransactionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TransactionsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<TransactionDto>> {
+            return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TransactionsApi - object-oriented interface
+ * @export
+ * @class TransactionsApi
+ * @extends {BaseAPI}
+ */
+export class TransactionsApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionsApi
+     */
+    public findAll(options?: RawAxiosRequestConfig) {
+        return TransactionsApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,26 +1,26 @@
-# ProductsApi
+# CashShiftsApi
 
 All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**findAll**](#findall) | **GET** /products | |
-|[**findOne**](#findone) | **GET** /products/{id} | |
+|[**findAll**](#findall) | **GET** /cash-shifts | |
+|[**findOne**](#findone) | **GET** /cash-shifts/{id} | |
 
 # **findAll**
-> Array<Product> findAll()
+> Array<CashShiftDto> findAll()
 
 
 ### Example
 
 ```typescript
 import {
-    ProductsApi,
+    CashShiftsApi,
     Configuration
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new ProductsApi(configuration);
+const apiInstance = new CashShiftsApi(configuration);
 
 const { status, data } = await apiInstance.findAll();
 ```
@@ -31,7 +31,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**Array<Product>**
+**Array<CashShiftDto>**
 
 ### Authorization
 
@@ -51,19 +51,19 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findOne**
-> Product findOne()
+> CashShiftDto findOne()
 
 
 ### Example
 
 ```typescript
 import {
-    ProductsApi,
+    CashShiftsApi,
     Configuration
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new ProductsApi(configuration);
+const apiInstance = new CashShiftsApi(configuration);
 
 let id: number; // (default to undefined)
 
@@ -81,7 +81,7 @@ const { status, data } = await apiInstance.findOne(
 
 ### Return type
 
-**Product**
+**CashShiftDto**
 
 ### Authorization
 

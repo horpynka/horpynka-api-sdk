@@ -1,26 +1,26 @@
-# ProductsApi
+# InventoryApi
 
 All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**findAll**](#findall) | **GET** /products | |
-|[**findOne**](#findone) | **GET** /products/{id} | |
+|[**findAll**](#findall) | **GET** /inventory | |
+|[**findOne**](#findone) | **GET** /inventory/{id} | |
 
 # **findAll**
-> Array<Product> findAll()
+> Array<InventoryDto> findAll()
 
 
 ### Example
 
 ```typescript
 import {
-    ProductsApi,
+    InventoryApi,
     Configuration
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new ProductsApi(configuration);
+const apiInstance = new InventoryApi(configuration);
 
 const { status, data } = await apiInstance.findAll();
 ```
@@ -31,7 +31,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**Array<Product>**
+**Array<InventoryDto>**
 
 ### Authorization
 
@@ -51,19 +51,19 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findOne**
-> Product findOne()
+> InventoryDto findOne()
 
 
 ### Example
 
 ```typescript
 import {
-    ProductsApi,
+    InventoryApi,
     Configuration
 } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new ProductsApi(configuration);
+const apiInstance = new InventoryApi(configuration);
 
 let id: number; // (default to undefined)
 
@@ -81,7 +81,7 @@ const { status, data } = await apiInstance.findOne(
 
 ### Return type
 
-**Product**
+**InventoryDto**
 
 ### Authorization
 
