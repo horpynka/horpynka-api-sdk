@@ -17,6 +17,7 @@ docs/DashboardStatsDto.md
 docs/Dish.md
 docs/DishIngredient.md
 docs/DishesApi.md
+docs/FindAllCategoriesResponseDto.md
 docs/Ingredient.md
 docs/IngredientsApi.md
 docs/InventoryApi.md

@@ -383,6 +383,25 @@ export interface DishIngredient {
 /**
  * 
  * @export
+ * @interface FindAllCategoriesResponseDto
+ */
+export interface FindAllCategoriesResponseDto {
+    /**
+     * 
+     * @type {Array<Category>}
+     * @memberof FindAllCategoriesResponseDto
+     */
+    'dishesCategories': Array<Category>;
+    /**
+     * 
+     * @type {Array<Category>}
+     * @memberof FindAllCategoriesResponseDto
+     */
+    'productsCategories': Array<Category>;
+}
+/**
+ * 
+ * @export
  * @interface Ingredient
  */
 export interface Ingredient {
@@ -1644,7 +1663,7 @@ export const CategoriesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindAllCategoriesResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CategoriesApi.findAll']?.[localVarOperationServerIndex]?.url;
@@ -1677,7 +1696,7 @@ export const CategoriesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAll(options?: RawAxiosRequestConfig): AxiosPromise<object> {
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<FindAllCategoriesResponseDto> {
             return localVarFp.findAll(options).then((request) => request(axios, basePath));
         },
         /**

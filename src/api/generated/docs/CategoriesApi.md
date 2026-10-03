@@ -8,7 +8,7 @@ All URIs are relative to *http://localhost*
 |[**findOne**](#findone) | **GET** /categories/{id} | |
 
 # **findAll**
-> object findAll()
+> FindAllCategoriesResponseDto findAll()
 
 
 ### Example
@@ -31,7 +31,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**object**
+**FindAllCategoriesResponseDto**
 
 ### Authorization
 
