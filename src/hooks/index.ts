@@ -1,5 +1,11 @@
 export { useAuthApi } from "../operations/authApi";
+export { useCashShiftsApi } from "../operations/cashShiftsApi";
 export { useCategoriesApi } from "../operations/categoriesApi";
+export { useDashboardApi } from "../operations/dashboardApi";
 export { useDishesApi } from "../operations/dishesApi";
+export { useIngredientsApi } from "../operations/ingredientsApi";
+export { useInventoryApi } from "../operations/inventoryApi";
+export { useMenuApi } from "../operations/menuApi";
 export { useOrdersApi } from "../operations/ordersApi";
 export { useProductsApi } from "../operations/productsApi";
+export { useTransactionsApi } from "../operations/transactionsApi";

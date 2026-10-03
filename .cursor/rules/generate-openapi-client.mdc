@@ -1,0 +1,14 @@
+---
+description: Keep the Horpynka API SDK in sync with the deployed OpenAPI spec. Use when generating clients, adding endpoints, or updating operations hooks.
+globs: src/client/**/*.ts,src/operations/**/*.ts,src/hooks/**/*.ts,src/index.ts
+alwaysApply: false
+---
+
+# Horpynka API SDK
+
+When the user asks to generate, update, or add an API client or operation hook, read and follow [generate-openapi-client](../skills/generate-openapi-client/SKILL.md) before editing.
+
+- Generated code lives in `src/api/generated`. Do not edit it by hand.
+- Instantiate each API class except `AppApi` in `src/client/clients.ts`, and re-export it from `src/client/index.ts`.
+- Add the TanStack Query hook in `src/operations`, then export it from `src/hooks/index.ts` and `src/index.ts`.
+- Compare against `OPENAPI_SPEC_URL` in `.env` (`https://horpynka.com/api/docs-json`). Leave the SDK unchanged when that spec has no new or removed operations.
