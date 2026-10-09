@@ -12,6 +12,7 @@ docs/CashShiftsApi.md
 docs/CategoriesApi.md
 docs/Category.md
 docs/CreateOrderDto.md
+docs/CreateProductDto.md
 docs/DashboardApi.md
 docs/DashboardStatsDto.md
 docs/Dish.md

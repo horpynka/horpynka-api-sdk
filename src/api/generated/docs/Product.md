@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **string** |  | [default to undefined]
 **ownPrice** | **number** |  | [default to undefined]
 **sellingPrice** | **number** |  | [default to undefined]
+**measurementUnit** | **string** |  | [default to undefined]
 **categoryId** | **number** |  | [default to undefined]
 **category** | [**Category**](Category.md) |  | [default to undefined]
 **selling** | **boolean** |  | [default to undefined]
@@ -25,6 +26,7 @@ const instance: Product = {
     name,
     ownPrice,
     sellingPrice,
+    measurementUnit,
     categoryId,
     category,
     selling,
