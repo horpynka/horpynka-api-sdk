@@ -1,6 +1,15 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import { authApi } from "../client"
 import { SignInUserDTO, SignUpUserDTO } from "../api/generated"
+
+const getSessionQuery = () =>
+  queryOptions({
+    queryKey: ["auth"],
+    queryFn: () =>
+      authApi
+        .getSession()
+        .then((res) => res.data),
+  })
 
 export const useAuthApi = () => {
   const queryClient = useQueryClient()
@@ -33,6 +42,7 @@ export const useAuthApi = () => {
   })
 
   return {
+    getSessionQuery,
     mutateRefresh,
     mutateSignIn,
     mutateSignUp,

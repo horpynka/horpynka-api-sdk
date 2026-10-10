@@ -25,6 +25,10 @@ Fetch `OPENAPI_SPEC_URL`. Continue only when the response is JSON and has a `pat
 From `horpynka-api-sdk` run:
 
 ```bash
+git pull
+```
+
+```bash
 yarn generate-api-client
 ```
 
