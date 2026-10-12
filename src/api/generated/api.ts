@@ -1166,6 +1166,58 @@ export const UpdateOrderDtoStatusEnum = {
 
 export type UpdateOrderDtoStatusEnum = typeof UpdateOrderDtoStatusEnum[keyof typeof UpdateOrderDtoStatusEnum];
 
+/**
+ * 
+ * @export
+ * @interface UpdateProductDto
+ */
+export interface UpdateProductDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateProductDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateProductDto
+     */
+    'categoryId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateProductDto
+     */
+    'measurementUnit': UpdateProductDtoMeasurementUnitEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateProductDto
+     */
+    'ownPrice': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateProductDto
+     */
+    'sellingPrice': number;
+    /**
+     * @default true
+     * @type {boolean}
+     * @memberof UpdateProductDto
+     */
+    'selling'?: boolean;
+}
+
+export const UpdateProductDtoMeasurementUnitEnum = {
+    G: 'g',
+    Ml: 'ml',
+    Pcs: 'pcs'
+} as const;
+
+export type UpdateProductDtoMeasurementUnitEnum = typeof UpdateProductDtoMeasurementUnitEnum[keyof typeof UpdateProductDtoMeasurementUnitEnum];
+
 
 /**
  * AppApi - axios parameter creator
@@ -3119,6 +3171,78 @@ export const ProductsApiAxiosParamCreator = function (configuration?: Configurat
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('remove', 'id', id)
+            const localVarPath = `/products/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateProductDto} updateProductDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update: async (id: number, updateProductDto: UpdateProductDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('update', 'id', id)
+            // verify required parameter 'updateProductDto' is not null or undefined
+            assertParamExists('update', 'updateProductDto', updateProductDto)
+            const localVarPath = `/products/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateProductDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -3164,6 +3288,31 @@ export const ProductsApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['ProductsApi.findOne']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async remove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.remove(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProductsApi.remove']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateProductDto} updateProductDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async update(id: number, updateProductDto: UpdateProductDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Product>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(id, updateProductDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProductsApi.update']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -3199,6 +3348,25 @@ export const ProductsApiFactory = function (configuration?: Configuration, baseP
          */
         findOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Product> {
             return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.remove(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateProductDto} updateProductDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update(id: number, updateProductDto: UpdateProductDto, options?: RawAxiosRequestConfig): AxiosPromise<Product> {
+            return localVarFp.update(id, updateProductDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3240,6 +3408,29 @@ export class ProductsApi extends BaseAPI {
      */
     public findOne(id: number, options?: RawAxiosRequestConfig) {
         return ProductsApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductsApi
+     */
+    public remove(id: number, options?: RawAxiosRequestConfig) {
+        return ProductsApiFp(this.configuration).remove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {UpdateProductDto} updateProductDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductsApi
+     */
+    public update(id: number, updateProductDto: UpdateProductDto, options?: RawAxiosRequestConfig) {
+        return ProductsApiFp(this.configuration).update(id, updateProductDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
