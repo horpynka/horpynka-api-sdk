@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **id** | **number** |  | [default to undefined]
 **dishId** | **number** |  | [default to undefined]
 **ingredientId** | **number** |  | [default to undefined]
+**quantity** | **number** | Measured in the ingredient\&#39;s &#x60;measurementUnit&#x60;. | [default to undefined]
 **dish** | [**Dish**](Dish.md) |  | [default to undefined]
 **ingredient** | [**Ingredient**](Ingredient.md) |  | [default to undefined]
 
@@ -20,6 +21,7 @@ const instance: DishIngredient = {
     id,
     dishId,
     ingredientId,
+    quantity,
     dish,
     ingredient,
 };

@@ -11,6 +11,8 @@ docs/CashShiftDto.md
 docs/CashShiftsApi.md
 docs/CategoriesApi.md
 docs/Category.md
+docs/CreateDishDto.md
+docs/CreateDishIngredientDto.md
 docs/CreateOrderDto.md
 docs/CreateProductDto.md
 docs/DashboardApi.md

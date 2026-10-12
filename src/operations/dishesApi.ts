@@ -1,5 +1,6 @@
-import { queryOptions } from "@tanstack/react-query"
+import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import { dishesApi } from "../client"
+import { CreateDishDto } from "../api/generated"
 
 const getDishesQuery = () =>
   queryOptions({
@@ -20,8 +21,20 @@ const getDishQuery = (id: number) =>
   })
 
 export const useDishesApi = () => {
+  const queryClient = useQueryClient()
+
+  const mutateCreateDish = useMutation({
+    mutationFn: ({ params: { createDishDto } }: { params: { createDishDto: CreateDishDto }; onSettledCallback?: () => void }) =>
+      dishesApi.create(createDishDto),
+    onSettled: (_data, _error, { onSettledCallback }) => {
+      queryClient.invalidateQueries({ queryKey: ["dishes"] })
+      onSettledCallback && onSettledCallback()
+    },
+  })
+
   return {
     getDishesQuery,
     getDishQuery,
+    mutateCreateDish,
   }
 }

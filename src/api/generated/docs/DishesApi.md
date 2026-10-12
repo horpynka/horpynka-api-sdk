@@ -4,8 +4,60 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**create**](#create) | **POST** /dishes | |
 |[**findAll**](#findall) | **GET** /dishes | |
 |[**findOne**](#findone) | **GET** /dishes/{id} | |
+
+# **create**
+> Dish create(createDishDto)
+
+
+### Example
+
+```typescript
+import {
+    DishesApi,
+    Configuration,
+    CreateDishDto
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new DishesApi(configuration);
+
+let createDishDto: CreateDishDto; //
+
+const { status, data } = await apiInstance.create(
+    createDishDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createDishDto** | **CreateDishDto**|  | |
+
+
+### Return type
+
+**Dish**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
 > Array<Dish> findAll()

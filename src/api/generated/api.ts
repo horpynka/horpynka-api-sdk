@@ -151,6 +151,68 @@ export interface Category {
 /**
  * 
  * @export
+ * @interface CreateDishDto
+ */
+export interface CreateDishDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateDishDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateDishDto
+     */
+    'categoryId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateDishDto
+     */
+    'ownPrice': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateDishDto
+     */
+    'sellingPrice': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateDishDto
+     */
+    'selling': boolean;
+    /**
+     * 
+     * @type {Set<CreateDishIngredientDto>}
+     * @memberof CreateDishDto
+     */
+    'ingredients': Set<CreateDishIngredientDto>;
+}
+/**
+ * 
+ * @export
+ * @interface CreateDishIngredientDto
+ */
+export interface CreateDishIngredientDto {
+    /**
+     * Measured in the ingredient\'s `measurementUnit`.
+     * @type {number}
+     * @memberof CreateDishIngredientDto
+     */
+    'quantity': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateDishIngredientDto
+     */
+    'ingredientId': number;
+}
+/**
+ * 
+ * @export
  * @interface CreateOrderDto
  */
 export interface CreateOrderDto {
@@ -419,6 +481,12 @@ export interface DishIngredient {
      * @memberof DishIngredient
      */
     'ingredientId': number | null;
+    /**
+     * Measured in the ingredient\'s `measurementUnit`.
+     * @type {number}
+     * @memberof DishIngredient
+     */
+    'quantity': number;
     /**
      * 
      * @type {Dish}
@@ -1914,6 +1982,41 @@ export const DishesApiAxiosParamCreator = function (configuration?: Configuratio
     return {
         /**
          * 
+         * @param {CreateDishDto} createDishDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create: async (createDishDto: CreateDishDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createDishDto' is not null or undefined
+            assertParamExists('create', 'createDishDto', createDishDto)
+            const localVarPath = `/dishes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createDishDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1986,6 +2089,18 @@ export const DishesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {CreateDishDto} createDishDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create(createDishDto: CreateDishDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dish>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(createDishDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DishesApi.create']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2019,6 +2134,15 @@ export const DishesApiFactory = function (configuration?: Configuration, basePat
     return {
         /**
          * 
+         * @param {CreateDishDto} createDishDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(createDishDto: CreateDishDto, options?: RawAxiosRequestConfig): AxiosPromise<Dish> {
+            return localVarFp.create(createDishDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2044,6 +2168,17 @@ export const DishesApiFactory = function (configuration?: Configuration, basePat
  * @extends {BaseAPI}
  */
 export class DishesApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateDishDto} createDishDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DishesApi
+     */
+    public create(createDishDto: CreateDishDto, options?: RawAxiosRequestConfig) {
+        return DishesApiFp(this.configuration).create(createDishDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {*} [options] Override http request option.
