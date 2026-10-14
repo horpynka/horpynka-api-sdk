@@ -1,6 +1,6 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import { productsApi } from "../client"
-import { CreateProductDto } from "../api/generated"
+import { CreateProductDto, UpdateProductDto } from "../api/generated"
 
 const getProductsQuery = () =>
   queryOptions({
@@ -32,9 +32,29 @@ export const useProductsApi = () => {
     },
   })
 
+  const mutateUpdateProduct = useMutation({
+    mutationFn: ({ params: { id, updateProductDto } }: { params: { id: number; updateProductDto: UpdateProductDto }; onSettledCallback?: () => void }) =>
+      productsApi.update(id, updateProductDto),
+    onSettled: (_data, _error, { onSettledCallback }) => {
+      queryClient.invalidateQueries({ queryKey: ["products"] })
+      onSettledCallback && onSettledCallback()
+    },
+  })
+
+  const mutateRemoveProduct = useMutation({
+    mutationFn: ({ params: { id } }: { params: { id: number }; onSettledCallback?: () => void }) =>
+      productsApi.remove(id),
+    onSettled: (_data, _error, { onSettledCallback }) => {
+      queryClient.invalidateQueries({ queryKey: ["products"] })
+      onSettledCallback && onSettledCallback()
+    },
+  })
+
   return {
     getProductsQuery,
     getProductQuery,
     mutateCreateProduct,
+    mutateUpdateProduct,
+    mutateRemoveProduct,
   }
 }
