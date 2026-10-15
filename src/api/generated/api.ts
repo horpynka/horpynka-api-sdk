@@ -213,6 +213,34 @@ export interface CreateDishIngredientDto {
 /**
  * 
  * @export
+ * @interface CreateIngredientDto
+ */
+export interface CreateIngredientDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateIngredientDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateIngredientDto
+     */
+    'measurementUnit': CreateIngredientDtoMeasurementUnitEnum;
+}
+
+export const CreateIngredientDtoMeasurementUnitEnum = {
+    G: 'g',
+    Ml: 'ml',
+    Pcs: 'pcs'
+} as const;
+
+export type CreateIngredientDtoMeasurementUnitEnum = typeof CreateIngredientDtoMeasurementUnitEnum[keyof typeof CreateIngredientDtoMeasurementUnitEnum];
+
+/**
+ * 
+ * @export
  * @interface CreateOrderDto
  */
 export interface CreateOrderDto {
@@ -2263,6 +2291,41 @@ export const IngredientsApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
+         * @param {CreateIngredientDto} createIngredientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create: async (createIngredientDto: CreateIngredientDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createIngredientDto' is not null or undefined
+            assertParamExists('create', 'createIngredientDto', createIngredientDto)
+            const localVarPath = `/ingredients`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createIngredientDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2335,6 +2398,18 @@ export const IngredientsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {CreateIngredientDto} createIngredientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create(createIngredientDto: CreateIngredientDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Ingredient>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(createIngredientDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IngredientsApi.create']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2368,6 +2443,15 @@ export const IngredientsApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
+         * @param {CreateIngredientDto} createIngredientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(createIngredientDto: CreateIngredientDto, options?: RawAxiosRequestConfig): AxiosPromise<Ingredient> {
+            return localVarFp.create(createIngredientDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2393,6 +2477,17 @@ export const IngredientsApiFactory = function (configuration?: Configuration, ba
  * @extends {BaseAPI}
  */
 export class IngredientsApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateIngredientDto} createIngredientDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IngredientsApi
+     */
+    public create(createIngredientDto: CreateIngredientDto, options?: RawAxiosRequestConfig) {
+        return IngredientsApiFp(this.configuration).create(createIngredientDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {*} [options] Override http request option.

@@ -13,6 +13,7 @@ docs/CategoriesApi.md
 docs/Category.md
 docs/CreateDishDto.md
 docs/CreateDishIngredientDto.md
+docs/CreateIngredientDto.md
 docs/CreateOrderDto.md
 docs/CreateProductDto.md
 docs/DashboardApi.md
