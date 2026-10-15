@@ -22,17 +22,17 @@ Fetch `OPENAPI_SPEC_URL`. Continue only when the response is JSON and has a `pat
 
 ## 2. Regenerate, then compare with implemented hooks
 
-From `horpynka-api-sdk` run:
+From `horpynka-api-sdk`, pull, then always run the client generator. Do not skip it after fetching the spec, and do not substitute another command:
 
 ```bash
 git pull
 ```
 
 ```bash
-yarn generate-api-client
+yarn run generate-api-client
 ```
 
-That command reads `OPENAPI_SPEC_URL`, runs OpenAPI Generator (`typescript-axios`) into `src/api/generated`, and patches `createRequestFunction` in `common.ts`.
+`yarn run generate-api-client` reads `OPENAPI_SPEC_URL`, runs OpenAPI Generator (`typescript-axios`) into `src/api/generated`, and patches `createRequestFunction` in `common.ts`. Compare hooks only after this command finishes.
 
 Do not decide what is done from `git diff -- src/api/generated` or from `src/api/generated/docs`. Those files are generated output. A clean diff only means the Axios client already matches the spec. Hooks can still be missing.
 
