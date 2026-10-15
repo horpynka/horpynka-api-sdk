@@ -20,7 +20,7 @@ The JSON document is `OPENAPI_SPEC_URL` in `.env`: `https://horpynka.com/api/doc
 
 Fetch `OPENAPI_SPEC_URL`. Continue only when the response is JSON and has a `paths` object. If the fetch fails or the body is HTML, stop and report that.
 
-## 2. Regenerate, then see what changed
+## 2. Regenerate, then compare with implemented hooks
 
 From `horpynka-api-sdk` run:
 
@@ -34,16 +34,18 @@ yarn generate-api-client
 
 That command reads `OPENAPI_SPEC_URL`, runs OpenAPI Generator (`typescript-axios`) into `src/api/generated`, and patches `createRequestFunction` in `common.ts`.
 
-Then compare:
+Do not decide what is done from `git diff -- src/api/generated` or from `src/api/generated/docs`. Those files are generated output. A clean diff only means the Axios client already matches the spec. Hooks can still be missing.
 
-- `git diff -- src/api/generated` for spec changes
-- every `export class *Api` in `src/api/generated/api.ts`, except `AppApi`, against `src/client/clients.ts` and `src/operations`
+Compare each spec endpoint with the hooks in `src/operations`:
 
-`AppApi` is only `GET /` (`getHello`). Leave it unwired.
+1. From the fetched spec, list every operation as `METHOD path` (`POST /ingredients`). Skip `GET /` (`AppApi.getHello`). Leave that endpoint unwired.
+2. Match each operation to the public method on its `export class *Api` in `src/api/generated/api.ts`. Read the method signature there for parameter names and DTO types.
+3. An endpoint is implemented when an operations file calls that method. It is not implemented when no operations file calls it.
+4. A hook that calls a method the generated class no longer has is an endpoint removed from the spec.
 
-If the generated diff is empty and every other API class already has a client instance and an operations hook that covers its public methods, stop. Tell the user the deployed spec matches the SDK.
+Wire every endpoint that is not implemented. If an endpoint disappeared, remove its client instance, operation helper, and barrel exports. Leave generated files to the generator.
 
-If a class or method disappeared from the spec, remove its client instance, operation file, and barrel exports. Leave generated files to the generator.
+If every endpoint except `GET /` is already called from `src/operations`, stop. Tell the user which endpoints are implemented and that none are missing.
 
 ## 3. Wire `src/client`
 
@@ -92,4 +94,4 @@ Keep both lists alphabetical.
 
 Run `yarn typecheck` in `horpynka-api-sdk`. Fix wiring errors. Do not hand-edit generated files to silence them; adjust `src/client` and `src/operations` instead.
 
-Tell the user which endpoints were added, updated, or removed, or that the deployed spec had no SDK changes.
+Tell the user which endpoints are already implemented in hooks, which were missing and are now wired, and which were removed.

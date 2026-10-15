@@ -11,4 +11,4 @@ When the user asks to generate, update, or add an API client or operation hook, 
 - Generated code lives in `src/api/generated`. Do not edit it by hand.
 - Instantiate each API class except `AppApi` in `src/client/clients.ts`, and re-export it from `src/client/index.ts`.
 - Add the TanStack Query hook in `src/operations`, then export it from `src/hooks/index.ts` and `src/index.ts`.
-- Compare against `OPENAPI_SPEC_URL` in `.env` (`https://horpynka.com/api/docs-json`). Leave the SDK unchanged when that spec has no new or removed operations.
+- Compare each endpoint from `OPENAPI_SPEC_URL` in `.env` (`https://horpynka.com/api/docs-json`) with the hooks in `src/operations`. Do not use `src/api/generated/docs` or a clean generated diff as proof the hooks are complete. Leave `GET /` (`AppApi`) unwired. Wire any endpoint the hooks do not call.

@@ -1,5 +1,6 @@
-import { queryOptions } from "@tanstack/react-query"
+import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import { ingredientsApi } from "../client"
+import { CreateIngredientDto } from "../api/generated"
 
 const getIngredientsQuery = () =>
   queryOptions({
@@ -20,8 +21,20 @@ const getIngredientQuery = (id: number) =>
   })
 
 export const useIngredientsApi = () => {
+  const queryClient = useQueryClient()
+
+  const mutateCreateIngredient = useMutation({
+    mutationFn: ({ params: { createIngredientDto } }: { params: { createIngredientDto: CreateIngredientDto }; onSettledCallback?: () => void }) =>
+      ingredientsApi.create(createIngredientDto),
+    onSettled: (_data, _error, { onSettledCallback }) => {
+      queryClient.invalidateQueries({ queryKey: ["ingredients"] })
+      onSettledCallback && onSettledCallback()
+    },
+  })
+
   return {
     getIngredientsQuery,
     getIngredientQuery,
+    mutateCreateIngredient,
   }
 }
