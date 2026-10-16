@@ -45,6 +45,7 @@ docs/SignUpUserDTO.md
 docs/TransactionDto.md
 docs/TransactionsApi.md
 docs/UpdateCategoryDto.md
+docs/UpdateIngredientDto.md
 docs/UpdateOrderDto.md
 docs/UpdateProductDto.md
 git_push.sh
