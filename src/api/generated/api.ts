@@ -151,6 +151,69 @@ export interface Category {
 /**
  * 
  * @export
+ * @interface CategoryResponseDto
+ */
+export interface CategoryResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CategoryResponseDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryResponseDto
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
+ * @interface CategoryWithCountsDto
+ */
+export interface CategoryWithCountsDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CategoryWithCountsDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryWithCountsDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CategoryWithCountsDto
+     */
+    'productsCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CategoryWithCountsDto
+     */
+    'dishesCount': number;
+}
+/**
+ * 
+ * @export
+ * @interface CreateCategoryDto
+ */
+export interface CreateCategoryDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCategoryDto
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
  * @interface CreateDishDto
  */
 export interface CreateDishDto {
@@ -546,6 +609,12 @@ export interface FindAllCategoriesResponseDto {
      * @memberof FindAllCategoriesResponseDto
      */
     'productsCategories': Array<Category>;
+    /**
+     * 
+     * @type {Array<CategoryWithCountsDto>}
+     * @memberof FindAllCategoriesResponseDto
+     */
+    'allCategories': Array<CategoryWithCountsDto>;
 }
 /**
  * 
@@ -1139,6 +1208,19 @@ export const TransactionDtoOrderStatusEnum = {
 
 export type TransactionDtoOrderStatusEnum = typeof TransactionDtoOrderStatusEnum[keyof typeof TransactionDtoOrderStatusEnum];
 
+/**
+ * 
+ * @export
+ * @interface UpdateCategoryDto
+ */
+export interface UpdateCategoryDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateCategoryDto
+     */
+    'name': string;
+}
 /**
  * 
  * @export
@@ -1803,6 +1885,41 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
     return {
         /**
          * 
+         * @param {CreateCategoryDto} createCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create: async (createCategoryDto: CreateCategoryDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createCategoryDto' is not null or undefined
+            assertParamExists('create', 'createCategoryDto', createCategoryDto)
+            const localVarPath = `/categories`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createCategoryDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1863,6 +1980,78 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('remove', 'id', id)
+            const localVarPath = `/categories/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateCategoryDto} updateCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update: async (id: number, updateCategoryDto: UpdateCategoryDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('update', 'id', id)
+            // verify required parameter 'updateCategoryDto' is not null or undefined
+            assertParamExists('update', 'updateCategoryDto', updateCategoryDto)
+            const localVarPath = `/categories/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCategoryDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -1873,6 +2062,18 @@ export const CategoriesApiAxiosParamCreator = function (configuration?: Configur
 export const CategoriesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CategoriesApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 
+         * @param {CreateCategoryDto} createCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create(createCategoryDto: CreateCategoryDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(createCategoryDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CategoriesApi.create']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * 
          * @param {*} [options] Override http request option.
@@ -1896,6 +2097,31 @@ export const CategoriesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['CategoriesApi.findOne']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async remove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.remove(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CategoriesApi.remove']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateCategoryDto} updateCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async update(id: number, updateCategoryDto: UpdateCategoryDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(id, updateCategoryDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CategoriesApi.update']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -1906,6 +2132,15 @@ export const CategoriesApiFp = function(configuration?: Configuration) {
 export const CategoriesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = CategoriesApiFp(configuration)
     return {
+        /**
+         * 
+         * @param {CreateCategoryDto} createCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(createCategoryDto: CreateCategoryDto, options?: RawAxiosRequestConfig): AxiosPromise<CategoryResponseDto> {
+            return localVarFp.create(createCategoryDto, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @param {*} [options] Override http request option.
@@ -1923,6 +2158,25 @@ export const CategoriesApiFactory = function (configuration?: Configuration, bas
         findOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Category> {
             return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.remove(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateCategoryDto} updateCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update(id: number, updateCategoryDto: UpdateCategoryDto, options?: RawAxiosRequestConfig): AxiosPromise<CategoryResponseDto> {
+            return localVarFp.update(id, updateCategoryDto, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -1933,6 +2187,17 @@ export const CategoriesApiFactory = function (configuration?: Configuration, bas
  * @extends {BaseAPI}
  */
 export class CategoriesApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateCategoryDto} createCategoryDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoriesApi
+     */
+    public create(createCategoryDto: CreateCategoryDto, options?: RawAxiosRequestConfig) {
+        return CategoriesApiFp(this.configuration).create(createCategoryDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {*} [options] Override http request option.
@@ -1952,6 +2217,29 @@ export class CategoriesApi extends BaseAPI {
      */
     public findOne(id: number, options?: RawAxiosRequestConfig) {
         return CategoriesApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoriesApi
+     */
+    public remove(id: number, options?: RawAxiosRequestConfig) {
+        return CategoriesApiFp(this.configuration).remove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {UpdateCategoryDto} updateCategoryDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoriesApi
+     */
+    public update(id: number, updateCategoryDto: UpdateCategoryDto, options?: RawAxiosRequestConfig) {
+        return CategoriesApiFp(this.configuration).update(id, updateCategoryDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -11,6 +11,9 @@ docs/CashShiftDto.md
 docs/CashShiftsApi.md
 docs/CategoriesApi.md
 docs/Category.md
+docs/CategoryResponseDto.md
+docs/CategoryWithCountsDto.md
+docs/CreateCategoryDto.md
 docs/CreateDishDto.md
 docs/CreateDishIngredientDto.md
 docs/CreateIngredientDto.md
@@ -41,6 +44,7 @@ docs/SignInUserDTO.md
 docs/SignUpUserDTO.md
 docs/TransactionDto.md
 docs/TransactionsApi.md
+docs/UpdateCategoryDto.md
 docs/UpdateOrderDto.md
 docs/UpdateProductDto.md
 git_push.sh

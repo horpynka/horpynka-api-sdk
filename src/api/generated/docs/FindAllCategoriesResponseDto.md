@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dishesCategories** | [**Array&lt;Category&gt;**](Category.md) |  | [default to undefined]
 **productsCategories** | [**Array&lt;Category&gt;**](Category.md) |  | [default to undefined]
+**allCategories** | [**Array&lt;CategoryWithCountsDto&gt;**](CategoryWithCountsDto.md) |  | [default to undefined]
 
 ## Example
 
@@ -16,6 +17,7 @@ import { FindAllCategoriesResponseDto } from './api';
 const instance: FindAllCategoriesResponseDto = {
     dishesCategories,
     productsCategories,
+    allCategories,
 };
 ```
 
