@@ -1224,6 +1224,19 @@ export interface UpdateCategoryDto {
 /**
  * 
  * @export
+ * @interface UpdateMenuItemSellingDto
+ */
+export interface UpdateMenuItemSellingDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateMenuItemSellingDto
+     */
+    'selling': boolean;
+}
+/**
+ * 
+ * @export
  * @interface UpdateOrderDto
  */
 export interface UpdateOrderDto {
@@ -2997,6 +3010,74 @@ export const MenuApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findCatalog: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/menu/catalog`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateMenuItemSellingDto} updateMenuItemSellingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSelling: async (id: string, updateMenuItemSellingDto: UpdateMenuItemSellingDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateSelling', 'id', id)
+            // verify required parameter 'updateMenuItemSellingDto' is not null or undefined
+            assertParamExists('updateSelling', 'updateMenuItemSellingDto', updateMenuItemSellingDto)
+            const localVarPath = `/menu/{id}/selling`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateMenuItemSellingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -3018,6 +3099,30 @@ export const MenuApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['MenuApi.findAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findCatalog(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MenuItemDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findCatalog(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MenuApi.findCatalog']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateMenuItemSellingDto} updateMenuItemSellingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSelling(id: string, updateMenuItemSellingDto: UpdateMenuItemSellingDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MenuItemDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSelling(id, updateMenuItemSellingDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MenuApi.updateSelling']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -3035,6 +3140,24 @@ export const MenuApiFactory = function (configuration?: Configuration, basePath?
          */
         findAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<MenuItemDto>> {
             return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findCatalog(options?: RawAxiosRequestConfig): AxiosPromise<Array<MenuItemDto>> {
+            return localVarFp.findCatalog(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateMenuItemSellingDto} updateMenuItemSellingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSelling(id: string, updateMenuItemSellingDto: UpdateMenuItemSellingDto, options?: RawAxiosRequestConfig): AxiosPromise<MenuItemDto> {
+            return localVarFp.updateSelling(id, updateMenuItemSellingDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3054,6 +3177,28 @@ export class MenuApi extends BaseAPI {
      */
     public findAll(options?: RawAxiosRequestConfig) {
         return MenuApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MenuApi
+     */
+    public findCatalog(options?: RawAxiosRequestConfig) {
+        return MenuApiFp(this.configuration).findCatalog(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateMenuItemSellingDto} updateMenuItemSellingDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MenuApi
+     */
+    public updateSelling(id: string, updateMenuItemSellingDto: UpdateMenuItemSellingDto, options?: RawAxiosRequestConfig) {
+        return MenuApiFp(this.configuration).updateSelling(id, updateMenuItemSellingDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
