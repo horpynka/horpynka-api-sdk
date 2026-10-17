@@ -2266,10 +2266,12 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
+         * @param {string} [from] Inclusive start date in Europe/Kyiv (YYYY-MM-DD)
+         * @param {string} [to] Inclusive end date in Europe/Kyiv (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStats: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getStats: async (from?: string, to?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/dashboard/stats`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2281,6 +2283,14 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = to;
+            }
 
 
     
@@ -2305,11 +2315,13 @@ export const DashboardApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} [from] Inclusive start date in Europe/Kyiv (YYYY-MM-DD)
+         * @param {string} [to] Inclusive end date in Europe/Kyiv (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStats(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardStatsDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getStats(options);
+        async getStats(from?: string, to?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardStatsDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStats(from, to, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DashboardApi.getStats']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2326,11 +2338,13 @@ export const DashboardApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
+         * @param {string} [from] Inclusive start date in Europe/Kyiv (YYYY-MM-DD)
+         * @param {string} [to] Inclusive end date in Europe/Kyiv (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStats(options?: RawAxiosRequestConfig): AxiosPromise<DashboardStatsDto> {
-            return localVarFp.getStats(options).then((request) => request(axios, basePath));
+        getStats(from?: string, to?: string, options?: RawAxiosRequestConfig): AxiosPromise<DashboardStatsDto> {
+            return localVarFp.getStats(from, to, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2344,12 +2358,14 @@ export const DashboardApiFactory = function (configuration?: Configuration, base
 export class DashboardApi extends BaseAPI {
     /**
      * 
+     * @param {string} [from] Inclusive start date in Europe/Kyiv (YYYY-MM-DD)
+     * @param {string} [to] Inclusive end date in Europe/Kyiv (YYYY-MM-DD)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DashboardApi
      */
-    public getStats(options?: RawAxiosRequestConfig) {
-        return DashboardApiFp(this.configuration).getStats(options).then((request) => request(this.axios, this.basePath));
+    public getStats(from?: string, to?: string, options?: RawAxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).getStats(from, to, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
