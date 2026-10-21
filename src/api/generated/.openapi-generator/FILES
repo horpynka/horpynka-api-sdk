@@ -19,6 +19,7 @@ docs/CreateDishIngredientDto.md
 docs/CreateIngredientDto.md
 docs/CreateOrderDto.md
 docs/CreateProductDto.md
+docs/CreateUserDto.md
 docs/DashboardApi.md
 docs/DashboardStatsDto.md
 docs/Dish.md
@@ -49,5 +50,10 @@ docs/UpdateIngredientDto.md
 docs/UpdateMenuItemSellingDto.md
 docs/UpdateOrderDto.md
 docs/UpdateProductDto.md
+docs/UpdateUserPasswordDto.md
+docs/UpdateUserPasswordResponseDto.md
+docs/UpdateUserRolesDto.md
+docs/UserResponseDto.md
+docs/UsersApi.md
 git_push.sh
 index.ts

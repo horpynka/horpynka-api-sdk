@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **string** |  | [default to undefined]
+**roles** | **Array&lt;string&gt;** |  | [default to undefined]
 
 ## Example
 
@@ -14,6 +15,7 @@ import { SessionResponseDto } from './api';
 
 const instance: SessionResponseDto = {
     email,
+    roles,
 };
 ```
 

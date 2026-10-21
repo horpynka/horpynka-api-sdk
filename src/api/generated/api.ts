@@ -411,6 +411,39 @@ export type CreateProductDtoMeasurementUnitEnum = typeof CreateProductDtoMeasure
 /**
  * 
  * @export
+ * @interface CreateUserDto
+ */
+export interface CreateUserDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    'password': string;
+    /**
+     * 
+     * @type {Set<string>}
+     * @memberof CreateUserDto
+     */
+    'roles': Set<CreateUserDtoRolesEnum>;
+}
+
+export const CreateUserDtoRolesEnum = {
+    HorpynkaPanelAdmin: 'HORPYNKA_PANEL_ADMIN',
+    HorpynkaCashierUser: 'HORPYNKA_CASHIER_USER'
+} as const;
+
+export type CreateUserDtoRolesEnum = typeof CreateUserDtoRolesEnum[keyof typeof CreateUserDtoRolesEnum];
+
+/**
+ * 
+ * @export
  * @interface DashboardStatsDto
  */
 export interface DashboardStatsDto {
@@ -1092,7 +1125,21 @@ export interface SessionResponseDto {
      * @memberof SessionResponseDto
      */
     'email': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof SessionResponseDto
+     */
+    'roles': Array<SessionResponseDtoRolesEnum>;
 }
+
+export const SessionResponseDtoRolesEnum = {
+    HorpynkaPanelAdmin: 'HORPYNKA_PANEL_ADMIN',
+    HorpynkaCashierUser: 'HORPYNKA_CASHIER_USER'
+} as const;
+
+export type SessionResponseDtoRolesEnum = typeof SessionResponseDtoRolesEnum[keyof typeof SessionResponseDtoRolesEnum];
+
 /**
  * 
  * @export
@@ -1368,6 +1415,86 @@ export const UpdateProductDtoMeasurementUnitEnum = {
 } as const;
 
 export type UpdateProductDtoMeasurementUnitEnum = typeof UpdateProductDtoMeasurementUnitEnum[keyof typeof UpdateProductDtoMeasurementUnitEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateUserPasswordDto
+ */
+export interface UpdateUserPasswordDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateUserPasswordDto
+     */
+    'password': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateUserPasswordResponseDto
+ */
+export interface UpdateUserPasswordResponseDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateUserPasswordResponseDto
+     */
+    'updated': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateUserRolesDto
+ */
+export interface UpdateUserRolesDto {
+    /**
+     * 
+     * @type {Set<string>}
+     * @memberof UpdateUserRolesDto
+     */
+    'roles': Set<UpdateUserRolesDtoRolesEnum>;
+}
+
+export const UpdateUserRolesDtoRolesEnum = {
+    HorpynkaPanelAdmin: 'HORPYNKA_PANEL_ADMIN',
+    HorpynkaCashierUser: 'HORPYNKA_CASHIER_USER'
+} as const;
+
+export type UpdateUserRolesDtoRolesEnum = typeof UpdateUserRolesDtoRolesEnum[keyof typeof UpdateUserRolesDtoRolesEnum];
+
+/**
+ * 
+ * @export
+ * @interface UserResponseDto
+ */
+export interface UserResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof UserResponseDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserResponseDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UserResponseDto
+     */
+    'roles': Array<UserResponseDtoRolesEnum>;
+}
+
+export const UserResponseDtoRolesEnum = {
+    HorpynkaPanelAdmin: 'HORPYNKA_PANEL_ADMIN',
+    HorpynkaCashierUser: 'HORPYNKA_CASHIER_USER'
+} as const;
+
+export type UserResponseDtoRolesEnum = typeof UserResponseDtoRolesEnum[keyof typeof UserResponseDtoRolesEnum];
 
 
 /**
@@ -4239,6 +4366,318 @@ export class TransactionsApi extends BaseAPI {
      */
     public findAll(options?: RawAxiosRequestConfig) {
         return TransactionsApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * UsersApi - axios parameter creator
+ * @export
+ */
+export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create: async (createUserDto: CreateUserDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createUserDto' is not null or undefined
+            assertParamExists('create', 'createUserDto', createUserDto)
+            const localVarPath = `/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createUserDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateUserPasswordDto} updateUserPasswordDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePassword: async (id: number, updateUserPasswordDto: UpdateUserPasswordDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updatePassword', 'id', id)
+            // verify required parameter 'updateUserPasswordDto' is not null or undefined
+            assertParamExists('updatePassword', 'updateUserPasswordDto', updateUserPasswordDto)
+            const localVarPath = `/users/{id}/password`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateUserPasswordDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateUserRolesDto} updateUserRolesDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRoles: async (id: number, updateUserRolesDto: UpdateUserRolesDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateRoles', 'id', id)
+            // verify required parameter 'updateUserRolesDto' is not null or undefined
+            assertParamExists('updateRoles', 'updateUserRolesDto', updateUserRolesDto)
+            const localVarPath = `/users/{id}/roles`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateUserRolesDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * UsersApi - functional programming interface
+ * @export
+ */
+export const UsersApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create(createUserDto: CreateUserDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(createUserDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.create']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateUserPasswordDto} updateUserPasswordDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePassword(id: number, updateUserPasswordDto: UpdateUserPasswordDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateUserPasswordResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePassword(id, updateUserPasswordDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.updatePassword']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateUserRolesDto} updateUserRolesDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateRoles(id: number, updateUserRolesDto: UpdateUserRolesDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRoles(id, updateUserRolesDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.updateRoles']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * UsersApi - factory interface
+ * @export
+ */
+export const UsersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UsersApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(createUserDto: CreateUserDto, options?: RawAxiosRequestConfig): AxiosPromise<UserResponseDto> {
+            return localVarFp.create(createUserDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<UserResponseDto>> {
+            return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateUserPasswordDto} updateUserPasswordDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePassword(id: number, updateUserPasswordDto: UpdateUserPasswordDto, options?: RawAxiosRequestConfig): AxiosPromise<UpdateUserPasswordResponseDto> {
+            return localVarFp.updatePassword(id, updateUserPasswordDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateUserRolesDto} updateUserRolesDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRoles(id: number, updateUserRolesDto: UpdateUserRolesDto, options?: RawAxiosRequestConfig): AxiosPromise<UserResponseDto> {
+            return localVarFp.updateRoles(id, updateUserRolesDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * UsersApi - object-oriented interface
+ * @export
+ * @class UsersApi
+ * @extends {BaseAPI}
+ */
+export class UsersApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateUserDto} createUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public create(createUserDto: CreateUserDto, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).create(createUserDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public findAll(options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {UpdateUserPasswordDto} updateUserPasswordDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public updatePassword(id: number, updateUserPasswordDto: UpdateUserPasswordDto, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).updatePassword(id, updateUserPasswordDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {UpdateUserRolesDto} updateUserRolesDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public updateRoles(id: number, updateUserRolesDto: UpdateUserRolesDto, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).updateRoles(id, updateUserRolesDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
