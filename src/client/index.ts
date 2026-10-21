@@ -12,4 +12,5 @@ export {
   ordersApi,
   productsApi,
   transactionsApi,
+  usersApi,
 } from "./clients";

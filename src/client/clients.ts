@@ -12,6 +12,7 @@ import {
   OrdersApi,
   ProductsApi,
   TransactionsApi,
+  UsersApi,
 } from "../api/generated";
 import { QueryClient } from "@tanstack/react-query";
 
@@ -27,6 +28,7 @@ export let menuApi: MenuApi;
 export let ordersApi: OrdersApi;
 export let productsApi: ProductsApi;
 export let transactionsApi: TransactionsApi;
+export let usersApi: UsersApi;
 
 export function initApiClient(config: CreateAxiosDefaults): AxiosInstance {
   const apiClient = axios.create({
@@ -50,6 +52,7 @@ export function initApiClient(config: CreateAxiosDefaults): AxiosInstance {
   ordersApi = new OrdersApi(configuration, undefined, apiClient);
   productsApi = new ProductsApi(configuration, undefined, apiClient);
   transactionsApi = new TransactionsApi(configuration, undefined, apiClient);
+  usersApi = new UsersApi(configuration, undefined, apiClient);
 
   return apiClient;
 }

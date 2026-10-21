@@ -76,14 +76,20 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrdersApi(configuration);
 
-let page: number; // (optional) (default to undefined)
-let limit: number; // (optional) (default to undefined)
-let status: string; // (optional) (default to undefined)
+let page: number; //Defaults to 1 (optional) (default to undefined)
+let limit: number; //Defaults to 10 (optional) (default to undefined)
+let status: 'CREATED' | 'PAID' | 'CANCELLED' | 'DELETED' | 'REFUNDED' | 'COMPLETED'; //Defaults to CREATED (optional) (default to undefined)
+let search: string; //Receipt number or status substring (optional) (default to undefined)
+let from: string; //Inclusive start date in Europe/Kyiv (YYYY-MM-DD) (optional) (default to undefined)
+let to: string; //Inclusive end date in Europe/Kyiv (YYYY-MM-DD) (optional) (default to undefined)
 
 const { status, data } = await apiInstance.findAll(
     page,
     limit,
-    status
+    status,
+    search,
+    from,
+    to
 );
 ```
 
@@ -91,9 +97,12 @@ const { status, data } = await apiInstance.findAll(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **page** | [**number**] |  | (optional) defaults to undefined|
-| **limit** | [**number**] |  | (optional) defaults to undefined|
-| **status** | [**string**] |  | (optional) defaults to undefined|
+| **page** | [**number**] | Defaults to 1 | (optional) defaults to undefined|
+| **limit** | [**number**] | Defaults to 10 | (optional) defaults to undefined|
+| **status** | [**&#39;CREATED&#39; | &#39;PAID&#39; | &#39;CANCELLED&#39; | &#39;DELETED&#39; | &#39;REFUNDED&#39; | &#39;COMPLETED&#39;**]**Array<&#39;CREATED&#39; &#124; &#39;PAID&#39; &#124; &#39;CANCELLED&#39; &#124; &#39;DELETED&#39; &#124; &#39;REFUNDED&#39; &#124; &#39;COMPLETED&#39;>** | Defaults to CREATED | (optional) defaults to undefined|
+| **search** | [**string**] | Receipt number or status substring | (optional) defaults to undefined|
+| **from** | [**string**] | Inclusive start date in Europe/Kyiv (YYYY-MM-DD) | (optional) defaults to undefined|
+| **to** | [**string**] | Inclusive end date in Europe/Kyiv (YYYY-MM-DD) | (optional) defaults to undefined|
 
 
 ### Return type

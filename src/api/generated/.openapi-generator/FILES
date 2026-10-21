@@ -13,6 +13,7 @@ docs/CategoriesApi.md
 docs/Category.md
 docs/CategoryResponseDto.md
 docs/CategoryWithCountsDto.md
+docs/CloseCashShiftDto.md
 docs/CreateCategoryDto.md
 docs/CreateDishDto.md
 docs/CreateDishIngredientDto.md
@@ -33,6 +34,7 @@ docs/InventoryDto.md
 docs/InventoryItemDto.md
 docs/MenuApi.md
 docs/MenuItemDto.md
+docs/OpenCashShiftDto.md
 docs/Order.md
 docs/OrderItem.md
 docs/OrdersApi.md
@@ -40,12 +42,16 @@ docs/PaymentSplitDto.md
 docs/Product.md
 docs/ProductsApi.md
 docs/SalesByDayDto.md
+docs/SaveInventoryDto.md
+docs/SaveInventoryItemDto.md
 docs/SessionResponseDto.md
 docs/SignInUserDTO.md
 docs/SignUpUserDTO.md
 docs/TransactionDto.md
 docs/TransactionsApi.md
 docs/UpdateCategoryDto.md
+docs/UpdateDishDto.md
+docs/UpdateDishIngredientDto.md
 docs/UpdateIngredientDto.md
 docs/UpdateMenuItemSellingDto.md
 docs/UpdateOrderDto.md

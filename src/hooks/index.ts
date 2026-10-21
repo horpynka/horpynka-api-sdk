@@ -9,3 +9,4 @@ export { useMenuApi } from "../operations/menuApi";
 export { useOrdersApi } from "../operations/ordersApi";
 export { useProductsApi } from "../operations/productsApi";
 export { useTransactionsApi } from "../operations/transactionsApi";
+export { useUsersApi } from "../operations/usersApi";
