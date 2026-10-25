@@ -21,11 +21,21 @@ import {
 const configuration = new Configuration();
 const apiInstance = new TransactionsApi(configuration);
 
-const { status, data } = await apiInstance.findAll();
+let from: string; //Inclusive start date in Europe/Kyiv (YYYY-MM-DD). Omit for no lower bound. (optional) (default to undefined)
+let to: string; //Inclusive end date in Europe/Kyiv (YYYY-MM-DD). Omit for no upper bound. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.findAll(
+    from,
+    to
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **from** | [**string**] | Inclusive start date in Europe/Kyiv (YYYY-MM-DD). Omit for no lower bound. | (optional) defaults to undefined|
+| **to** | [**string**] | Inclusive end date in Europe/Kyiv (YYYY-MM-DD). Omit for no upper bound. | (optional) defaults to undefined|
 
 
 ### Return type

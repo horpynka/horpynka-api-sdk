@@ -1,17 +1,20 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import { ordersApi } from "../client"
-import { CreateOrderDto, UpdateOrderDto } from "../api/generated"
+import { CreateOrderDto, FindAllStatusEnum, UpdateOrderDto } from "../api/generated"
 
 const getOrdersQuery = (params?: {
   page?: number
   limit?: number
-  status?: string
+  status?: FindAllStatusEnum
+  search?: string
+  from?: string
+  to?: string
 }) =>
   queryOptions({
     queryKey: ["orders", params],
     queryFn: () =>
       ordersApi
-        .findAll(params?.page, params?.limit, params?.status)
+        .findAll(params?.page, params?.limit, params?.status, params?.search, params?.from, params?.to)
         .then((res) => res.data),
   })
 

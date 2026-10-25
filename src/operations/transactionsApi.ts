@@ -1,12 +1,12 @@
 import { queryOptions } from "@tanstack/react-query"
 import { transactionsApi } from "../client"
 
-const getTransactionsQuery = () =>
+const getTransactionsQuery = (params?: { from?: string; to?: string }) =>
   queryOptions({
-    queryKey: ["transactions"],
+    queryKey: ["transactions", params],
     queryFn: () =>
       transactionsApi
-        .findAll()
+        .findAll(params?.from, params?.to)
         .then((res) => res.data),
   })
 

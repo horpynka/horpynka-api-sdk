@@ -13,12 +13,14 @@ docs/CategoriesApi.md
 docs/Category.md
 docs/CategoryResponseDto.md
 docs/CategoryWithCountsDto.md
+docs/CloseCashShiftDto.md
 docs/CreateCategoryDto.md
 docs/CreateDishDto.md
 docs/CreateDishIngredientDto.md
 docs/CreateIngredientDto.md
 docs/CreateOrderDto.md
 docs/CreateProductDto.md
+docs/CreateUserDto.md
 docs/DashboardApi.md
 docs/DashboardStatsDto.md
 docs/Dish.md
@@ -32,6 +34,7 @@ docs/InventoryDto.md
 docs/InventoryItemDto.md
 docs/MenuApi.md
 docs/MenuItemDto.md
+docs/OpenCashShiftDto.md
 docs/Order.md
 docs/OrderItem.md
 docs/OrdersApi.md
@@ -39,6 +42,8 @@ docs/PaymentSplitDto.md
 docs/Product.md
 docs/ProductsApi.md
 docs/SalesByDayDto.md
+docs/SaveInventoryDto.md
+docs/SaveInventoryItemDto.md
 docs/SessionResponseDto.md
 docs/SignInUserDTO.md
 docs/SignUpUserDTO.md
@@ -48,5 +53,10 @@ docs/UpdateCategoryDto.md
 docs/UpdateIngredientDto.md
 docs/UpdateOrderDto.md
 docs/UpdateProductDto.md
+docs/UpdateUserPasswordDto.md
+docs/UpdateUserPasswordResponseDto.md
+docs/UpdateUserRolesDto.md
+docs/UserResponseDto.md
+docs/UsersApi.md
 git_push.sh
 index.ts

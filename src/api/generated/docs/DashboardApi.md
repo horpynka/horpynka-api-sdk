@@ -21,11 +21,21 @@ import {
 const configuration = new Configuration();
 const apiInstance = new DashboardApi(configuration);
 
-const { status, data } = await apiInstance.getStats();
+let from: string; //Inclusive start date in Europe/Kyiv (YYYY-MM-DD) (optional) (default to undefined)
+let to: string; //Inclusive end date in Europe/Kyiv (YYYY-MM-DD) (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getStats(
+    from,
+    to
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **from** | [**string**] | Inclusive start date in Europe/Kyiv (YYYY-MM-DD) | (optional) defaults to undefined|
+| **to** | [**string**] | Inclusive end date in Europe/Kyiv (YYYY-MM-DD) | (optional) defaults to undefined|
 
 
 ### Return type

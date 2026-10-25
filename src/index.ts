@@ -10,3 +10,4 @@ export * from "./operations/menuApi";
 export * from "./operations/ordersApi";
 export * from "./operations/productsApi";
 export * from "./operations/transactionsApi";
+export * from "./operations/usersApi";

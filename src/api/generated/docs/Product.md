@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ownPrice** | **number** |  | [default to undefined]
 **sellingPrice** | **number** |  | [default to undefined]
 **measurementUnit** | **string** |  | [default to undefined]
+**stockQuantity** | **number** | Quantitative remainder in &#x60;measurementUnit&#x60;. Null means the product is not tracked by quantity and is left out of inventory checks. | [default to undefined]
 **categoryId** | **number** |  | [default to undefined]
 **category** | [**Category**](Category.md) |  | [default to undefined]
 **selling** | **boolean** |  | [default to undefined]
@@ -27,6 +28,7 @@ const instance: Product = {
     ownPrice,
     sellingPrice,
     measurementUnit,
+    stockQuantity,
     categoryId,
     category,
     selling,

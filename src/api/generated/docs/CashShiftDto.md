@@ -12,7 +12,9 @@ Name | Type | Description | Notes
 **cashSales** | **number** |  | [default to undefined]
 **cardSales** | **number** |  | [default to undefined]
 **refunds** | **number** |  | [default to undefined]
-**closingBalance** | **number** |  | [default to undefined]
+**closingBalance** | **number** | Expected cash in the drawer: opening balance plus cash sales, minus cash refunds. | [default to undefined]
+**actualClosingBalance** | **number** | Cash counted in the drawer at close, in kopecks. Null while the shift is open. | [default to undefined]
+**difference** | **number** | &#x60;actualClosingBalance&#x60; minus &#x60;closingBalance&#x60;, in kopecks. Positive when the drawer holds more cash than expected. Null while the shift is open. | [default to undefined]
 **ordersCount** | **number** |  | [default to undefined]
 **status** | **string** |  | [default to undefined]
 **cashierName** | **string** |  | [default to undefined]
@@ -31,6 +33,8 @@ const instance: CashShiftDto = {
     cardSales,
     refunds,
     closingBalance,
+    actualClosingBalance,
+    difference,
     ordersCount,
     status,
     cashierName,

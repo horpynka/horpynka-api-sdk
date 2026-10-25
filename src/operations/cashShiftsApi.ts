@@ -1,5 +1,6 @@
-import { queryOptions } from "@tanstack/react-query"
+import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import { cashShiftsApi } from "../client"
+import { CloseCashShiftDto, OpenCashShiftDto } from "../api/generated"
 
 const getCashShiftsQuery = () =>
   queryOptions({
@@ -20,8 +21,30 @@ const getCashShiftQuery = (id: number) =>
   })
 
 export const useCashShiftsApi = () => {
+  const queryClient = useQueryClient()
+
+  const mutateOpenCashShift = useMutation({
+    mutationFn: ({ params: { openCashShiftDto } }: { params: { openCashShiftDto: OpenCashShiftDto }; onSettledCallback?: () => void }) =>
+      cashShiftsApi.open(openCashShiftDto),
+    onSettled: (_data, _error, { onSettledCallback }) => {
+      queryClient.invalidateQueries({ queryKey: ["cash-shifts"] })
+      onSettledCallback && onSettledCallback()
+    },
+  })
+
+  const mutateCloseCashShift = useMutation({
+    mutationFn: ({ params: { id, closeCashShiftDto } }: { params: { id: number; closeCashShiftDto: CloseCashShiftDto }; onSettledCallback?: () => void }) =>
+      cashShiftsApi.close(id, closeCashShiftDto),
+    onSettled: (_data, _error, { onSettledCallback }) => {
+      queryClient.invalidateQueries({ queryKey: ["cash-shifts"] })
+      onSettledCallback && onSettledCallback()
+    },
+  })
+
   return {
     getCashShiftsQuery,
     getCashShiftQuery,
+    mutateOpenCashShift,
+    mutateCloseCashShift,
   }
 }

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **name** | **string** |  | [default to undefined]
 **measurementUnit** | **string** |  | [default to undefined]
 **expectedQuantity** | **number** |  | [default to undefined]
-**actualQuantity** | **number** |  | [default to undefined]
+**actualQuantity** | **number** | Empty until the counted amount is saved. | [default to undefined]
 
 ## Example
 
