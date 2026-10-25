@@ -1,3 +1,4 @@
+export type * from "./models";
 export * from "./client";
 export * from "./operations/authApi";
 export * from "./operations/cashShiftsApi";
