@@ -1362,68 +1362,6 @@ export interface UpdateCategoryDto {
 /**
  * 
  * @export
- * @interface UpdateDishDto
- */
-export interface UpdateDishDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateDishDto
-     */
-    'name': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateDishDto
-     */
-    'categoryId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateDishDto
-     */
-    'ownPrice': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateDishDto
-     */
-    'sellingPrice': number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateDishDto
-     */
-    'selling': boolean;
-    /**
-     * 
-     * @type {Set<UpdateDishIngredientDto>}
-     * @memberof UpdateDishDto
-     */
-    'ingredients': Set<UpdateDishIngredientDto>;
-}
-/**
- * 
- * @export
- * @interface UpdateDishIngredientDto
- */
-export interface UpdateDishIngredientDto {
-    /**
-     * Measured in the ingredient\'s `measurementUnit`.
-     * @type {number}
-     * @memberof UpdateDishIngredientDto
-     */
-    'quantity': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateDishIngredientDto
-     */
-    'ingredientId': number;
-}
-/**
- * 
- * @export
  * @interface UpdateIngredientDto
  */
 export interface UpdateIngredientDto {
@@ -1449,19 +1387,6 @@ export const UpdateIngredientDtoMeasurementUnitEnum = {
 
 export type UpdateIngredientDtoMeasurementUnitEnum = typeof UpdateIngredientDtoMeasurementUnitEnum[keyof typeof UpdateIngredientDtoMeasurementUnitEnum];
 
-/**
- * 
- * @export
- * @interface UpdateMenuItemSellingDto
- */
-export interface UpdateMenuItemSellingDto {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateMenuItemSellingDto
-     */
-    'selling': boolean;
-}
 /**
  * 
  * @export
@@ -3291,6 +3216,88 @@ export const IngredientsApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('remove', 'id', id)
+            const localVarPath = `/ingredients/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {UpdateIngredientDto} updateIngredientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update: async (id: number, updateIngredientDto: UpdateIngredientDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('update', 'id', id)
+            // verify required parameter 'updateIngredientDto' is not null or undefined
+            assertParamExists('update', 'updateIngredientDto', updateIngredientDto)
+            const localVarPath = `/ingredients/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateIngredientDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * IngredientsApi - functional programming interface
+ * @export
+ */
+export const IngredientsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = IngredientsApiAxiosParamCreator(configuration)
+    return {
         /**
          * 
          * @param {number} id 
