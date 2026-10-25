@@ -50,7 +50,10 @@ docs/SignUpUserDTO.md
 docs/TransactionDto.md
 docs/TransactionsApi.md
 docs/UpdateCategoryDto.md
+docs/UpdateDishDto.md
+docs/UpdateDishIngredientDto.md
 docs/UpdateIngredientDto.md
+docs/UpdateMenuItemSellingDto.md
 docs/UpdateOrderDto.md
 docs/UpdateProductDto.md
 docs/UpdateUserPasswordDto.md
