@@ -1,6 +1,6 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import { authApi } from "../client"
-import { SignInUserDTO, SignUpUserDTO } from "../api/generated"
+import { RefreshTokenDto, SignInUserDTO, SignUpUserDTO } from "../api/generated"
 
 const getSessionQuery = () =>
   queryOptions({
@@ -15,11 +15,11 @@ export const useAuthApi = () => {
   const queryClient = useQueryClient()
 
   const mutateRefresh = useMutation({
-    mutationFn: ({ onSettledCallback }: { onSettledCallback?: () => void } = {}) =>
-      authApi.refresh(),
-    onSettled: (_data, _error, variables) => {
+    mutationFn: ({ params: { refreshTokenDto } }: { params: { refreshTokenDto: RefreshTokenDto }; onSettledCallback?: () => void }) =>
+      authApi.refresh(refreshTokenDto),
+    onSettled: (_data, _error, { onSettledCallback }) => {
       queryClient.invalidateQueries({ queryKey: ["auth"] })
-      variables?.onSettledCallback && variables.onSettledCallback()
+      onSettledCallback && onSettledCallback()
     },
   })
 

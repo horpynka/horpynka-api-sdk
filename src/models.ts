@@ -50,6 +50,7 @@ export type {
   OrderItem,
   PaymentSplitDto,
   Product,
+  RefreshTokenDto,
   SalesByDayDto,
   SaveInventoryDto,
   SaveInventoryItemDto,

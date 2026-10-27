@@ -35,6 +35,12 @@ export interface AccessTokenResponseDto {
      * @memberof AccessTokenResponseDto
      */
     'accessToken': string;
+    /**
+     * Returned when the request includes `X-Client-Type: mobile`.
+     * @type {string}
+     * @memberof AccessTokenResponseDto
+     */
+    'refreshToken'?: string;
 }
 /**
  * 
@@ -1150,6 +1156,19 @@ export type ProductMeasurementUnitEnum = typeof ProductMeasurementUnitEnum[keyof
 /**
  * 
  * @export
+ * @interface RefreshTokenDto
+ */
+export interface RefreshTokenDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof RefreshTokenDto
+     */
+    'refreshToken'?: string;
+}
+/**
+ * 
+ * @export
  * @interface SalesByDayDto
  */
 export interface SalesByDayDto {
@@ -1784,10 +1803,13 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {RefreshTokenDto} refreshTokenDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        refresh: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        refresh: async (refreshTokenDto: RefreshTokenDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'refreshTokenDto' is not null or undefined
+            assertParamExists('refresh', 'refreshTokenDto', refreshTokenDto)
             const localVarPath = `/auth/refresh`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1796,15 +1818,18 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(refreshTokenDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1904,11 +1929,12 @@ export const AuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {RefreshTokenDto} refreshTokenDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async refresh(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.refresh(options);
+        async refresh(refreshTokenDto: RefreshTokenDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.refresh(refreshTokenDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthApi.refresh']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1957,11 +1983,12 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {RefreshTokenDto} refreshTokenDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        refresh(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.refresh(options).then((request) => request(axios, basePath));
+        refresh(refreshTokenDto: RefreshTokenDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.refresh(refreshTokenDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2003,12 +2030,13 @@ export class AuthApi extends BaseAPI {
 
     /**
      * 
+     * @param {RefreshTokenDto} refreshTokenDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public refresh(options?: RawAxiosRequestConfig) {
-        return AuthApiFp(this.configuration).refresh(options).then((request) => request(this.axios, this.basePath));
+    public refresh(refreshTokenDto: RefreshTokenDto, options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).refresh(refreshTokenDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**getSession**](#getsession) | **GET** /auth/get-session | |
-|[**refresh**](#refresh) | **GET** /auth/refresh | |
+|[**refresh**](#refresh) | **POST** /auth/refresh | |
 |[**signIn**](#signin) | **POST** /auth/sign-in | |
 |[**signUp**](#signup) | **POST** /auth/sign-up | |
 
@@ -53,7 +53,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **refresh**
-> refresh()
+> refresh(refreshTokenDto)
 
 
 ### Example
@@ -61,17 +61,25 @@ No authorization required
 ```typescript
 import {
     AuthApi,
-    Configuration
+    Configuration,
+    RefreshTokenDto
 } from './api';
 
 const configuration = new Configuration();
 const apiInstance = new AuthApi(configuration);
 
-const { status, data } = await apiInstance.refresh();
+let refreshTokenDto: RefreshTokenDto; //
+
+const { status, data } = await apiInstance.refresh(
+    refreshTokenDto
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **refreshTokenDto** | **RefreshTokenDto**|  | |
 
 
 ### Return type
@@ -84,7 +92,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 

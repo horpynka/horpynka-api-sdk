@@ -41,6 +41,7 @@ docs/OrdersApi.md
 docs/PaymentSplitDto.md
 docs/Product.md
 docs/ProductsApi.md
+docs/RefreshTokenDto.md
 docs/SalesByDayDto.md
 docs/SaveInventoryDto.md
 docs/SaveInventoryItemDto.md
